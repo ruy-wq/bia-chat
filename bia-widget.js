@@ -6,7 +6,7 @@
 (function () {
   // ⚙️ CONFIGURAÇÃO
   const CFG = {
-    API_KEY: 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,
+    API_KEY: API_KEY: 'sk-ant-api03-Qd4cNjXbsXwpKJfdAm1s4DAwJvR_X9MMvwB5Vr_I13NvoVzdaZSvWMP-CLPBQnLTVChumh4k1QLW0TJ_4kIcdQ-HrK39AAA',
     WEBHOOK: 'https://agtbo.app.n8n.cloud/webhook/tbo-lead-form',
     MODEL: 'claude-haiku-4-5-20251001',
     CALCOM: 'https://cal.com/ruy-lima-cho2u7/reuniao-tbo'
