@@ -158,8 +158,8 @@ window._biaSendMsg = async function(text) {
   addUser(text); showTyping();
   chatHistory.push({ role: 'user', content: text });
   try {
-    var res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST', headers: { 'Content-Type': 'application/json', 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
+    var res = await fetch('https://agtbo.app.n8n.cloud/webhook/bia-proxy', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1024, system: SYSTEM_PROMPT, messages: chatHistory })
     });
     var data = await res.json();
