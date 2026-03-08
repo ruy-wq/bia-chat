@@ -159,7 +159,7 @@ window._biaSendMsg = async function(text) {
   chatHistory.push({ role: 'user', content: text });
   try {
     var res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST', headers: { 'Content-Type': 'application/json', 'x-api-key': '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', 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
+      method: 'POST', headers: { 'Content-Type': 'application/json', 'x-api-key': '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', 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
       body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1024, system: SYSTEM_PROMPT, messages: chatHistory })
     });
     var data = await res.json();
