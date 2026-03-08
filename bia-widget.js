@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Bia Widget v3 - TBO Lançamentos Imobiliários
  * Chatbot com IA para qualificação de leads
  * Hospedado via GitHub Pages: https://ruy-wq.github.io/bia-chat/bia-widget.js
@@ -158,8 +158,8 @@ window._biaSendMsg = async function(text) {
   addUser(text); showTyping();
   chatHistory.push({ role: 'user', content: text });
   try {
-    var res = await fetch('https://agtbo.app.n8n.cloud/webhook/bia-proxy', {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
+    var res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST', headers: { 'Content-Type': 'application/json', 'x-api-key': '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', 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
       body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1024, system: SYSTEM_PROMPT, messages: chatHistory })
     });
     var data = await res.json();
@@ -199,4 +199,4 @@ inp.addEventListener('input', upd);
 inp.addEventListener('keydown', function(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); window._biaSend(); } });
 initParticles();
 
-})();
+})();
