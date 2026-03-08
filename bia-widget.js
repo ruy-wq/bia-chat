@@ -158,20 +158,16 @@ window._biaSendMsg = async function(text) {
   addUser(text); showTyping();
   chatHistory.push({ role: 'user', content: text });
   try {
-    var res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST', headers: { 'Content-Type': 'application/json', 'x-api-key': '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', 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
-      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1024, system: SYSTEM_PROMPT, messages: chatHistory })
+    var res = await fetch('https://olnndpultyllyhzxuyxh.supabase.co/functions/v1/bia-chat', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: text, chatHistory: chatHistory.slice(0, -1) })
     });
-    var data = await res.json();
-    var raw = data.content && data.content[0] && data.content[0].text ? data.content[0].text : '{"message":"Desculpe, pode repetir?","quick_replies":["Tentar novamente"]}';
-    var p;
-    try { var m = raw.match(/\{[\s\S]*\}/); p = m ? JSON.parse(m[0]) : { message: raw, quick_replies: [] }; }
-    catch(e) { p = { message: raw, quick_replies: ['Tentar novamente'] }; }
+    var p = await res.json();
     if (p.lead_data) {
       Object.entries(p.lead_data).forEach(function(entry) { var k = entry[0], v = entry[1]; if (v && typeof v === 'string' && v.trim()) leadData[k] = v; });
       if (leadData.nome || leadData.email || leadData.telefone) saveLead(p.classificacao);
     }
-    chatHistory.push({ role: 'assistant', content: raw });
+    chatHistory.push({ role: 'assistant', content: JSON.stringify(p) });
     hideTyping();
     addBot(p.message || raw, p.quick_replies || [], p.transfer_to_human);
     if (p.transfer_to_human) setTimeout(function() { var el = document.createElement('div'); el.className = 'ms-sys'; el.textContent = 'Conectando com especialista TBO...'; document.getElementById('bia-m').appendChild(el); scr(); }, 1200);
