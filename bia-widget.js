@@ -1,5 +1,5 @@
-/**
- * Bia Widget v2 - TBO Lançamentos Imobiliários
+﻿/**
+ * Bia Widget v3 - TBO Lançamentos Imobiliários
  * Chatbot com IA para qualificação de leads
  * Hospedado via GitHub Pages: https://ruy-wq.github.io/bia-chat/bia-widget.js
  */
@@ -185,7 +185,7 @@ async function saveLead(c) {
   if (leadSaved) return;
   try {
     await fetch(CFG.WEBHOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ Nome: leadData.nome || '', Email: leadData.email || '', whatsapp: leadData.telefone || '', Cidade: leadData.cidade || '', Momento: leadData.momento || '', VGV: leadData.vgv || '', classificacao: c || 'indefinido', origem: 'chatbot-bia', session_id: sid }), mode: 'no-cors' });
+      body: JSON.stringify({ Nome: leadData.nome || '', Email: leadData.email || '', whatsapp: leadData.telefone || '', Cidade: leadData.cidade || '', Momento: leadData.momento || '', VGV: leadData.vgv || '', classificacao: c || 'indefinido', origem: 'chatbot-bia', session_id: sid }) });
     if (leadData.email || leadData.telefone) leadSaved = true;
   } catch(e) {}
 }
@@ -199,4 +199,4 @@ inp.addEventListener('input', upd);
 inp.addEventListener('keydown', function(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); window._biaSend(); } });
 initParticles();
 
-})();
+})();
